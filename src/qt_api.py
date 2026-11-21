@@ -1119,6 +1119,7 @@ def _patch_enums_for_qt6():
     # Promote whole scoped enums onto their owner class. Use __members__ rather
     # than iteration so zero and combined flags (NoEditTriggers, ReadWrite) are kept.
     for owner, enum_name in (
+            (getattr(QtCore, "QEvent", None), "Type"),  # PyQt6 6.12: QEvent.LayoutRequest etc.
             (getattr(QtCore, "Qt", None), "WidgetAttribute"),
             (getattr(QtCore, "Qt", None), "ToolBarArea"),
             (getattr(QtCore, "QIODevice", None), "OpenModeFlag"),
