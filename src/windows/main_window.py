@@ -5857,6 +5857,13 @@ class MainWindow(AssetKeyboardMixin, updates.UpdateWatcher, QMainWindow):
         if self.dockAudioRecording.isVisible():
             self._ensure_audio_recording_dock_content()
 
+        # External plugins (classes/plugins.py, installed by openshot-autodub)
+        try:
+            from classes.plugins import load_plugins
+            load_plugins(self)
+        except Exception:
+            log.error("Plugin loader failed", exc_info=True)
+
         # Create tutorial manager
         self.tutorial_manager = TutorialManager(self)
 
